@@ -1,0 +1,43 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Home
+{% endblock %}
+
+{% block main %}
+    <form action="/deposit" method="post">
+        <div class="form-group">
+            <input autocomplete="off" autofocus class="form-control" name="cash" placeholder="Deposit cash" type="number" min="0" step=".01">
+        </div>
+        <button class="btn btn-primary" type="submit">Deposit</button>
+    </form>
+    <br>
+    <table class="table">
+        <tr>
+            <td>Stock</td>
+            <td>Shares Owned</td>
+            <td>Price/Share</td>
+            <td>Value</td>
+        </tr>
+        {% for row in holdings %}
+        <tr>
+            <td>{{ row['name'] }}</td>
+            <td>{{ row['SUM(shares)'] }}</td>
+            <td>${{ row['price'] }}</td>
+            <td>{{ "$%.2f"|format(row['price']*row['SUM(shares)']) }}</td>
+        </tr>
+        {% endfor %}
+        <tr>
+            <td></td>
+            <td></td>
+            <td>Cash available:</td>
+            <td>{{ cash }}</td>
+        </tr>
+        <tr>
+            <td></td>
+            <td></td>
+            <td>Total portfolio value:</td>
+            <td>{{ value }}</td>
+        </tr>
+    </table>
+{% endblock %}

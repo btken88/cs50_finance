@@ -1,0 +1,2 @@
+export API_KEY=pk_513ebc144e214cb4af41b7d9a50e03ae
+flask run
